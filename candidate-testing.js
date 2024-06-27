@@ -26,7 +26,6 @@ let correctAnswers = [
   "3"
 ];
 let candidateAnswers = [];
-let candidateAccuracy = [];
 
 
 function askForName() {
@@ -50,10 +49,8 @@ function gradeQuiz(candidateAnswers) {
       console.log(`Question ${i+1}: Your answer: ${candidateAnswers[i]} Correct answer: ${correctAnswers[i]}` )
       if(candidateAnswers[i] === correctAnswers[i]){
         console.log("Correct!!");
-        candidateAccuracy[i] = true;
       }else{
         console.log("Incorrect...");
-        candidateAccuracy[i] = false;
       }
     }
     // if(candidateAnswer === correctAnswer){
@@ -64,6 +61,21 @@ function gradeQuiz(candidateAnswers) {
 
 
   let grade;  //TODO 3.2 use this variable to calculate the candidates score.
+  let correctlyAnsweredQuestions = 0;
+
+  for(let i = 0; i < questions.length; i++){
+    if(candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()){
+      correctlyAnsweredQuestions += 1;
+    }
+  }
+
+  grade = (correctlyAnsweredQuestions / questions.length) * 100;
+
+  if(grade >= 80){ 
+    console.log(`Congratulations, ${candidateName}, You passed the test with a score of ${grade}!`);
+  }else{
+    console.log(`Better luck next time, champ... You scored a ${grade} which was not passing...`);
+  }
 
 
   return grade;
